@@ -28,7 +28,13 @@ export class SigninComponent {
       next: (user: User) => {
         this.isLoading = false;
         const type = user.type.toLowerCase();
-        this.router.navigate(['../../', type], { relativeTo: this.route });
+        if (user.name === '') {
+          this.router.navigate(['../../', `${type}/profiledetails`], {
+            relativeTo: this.route,
+          });
+        } else {
+          this.router.navigate(['../../', type], { relativeTo: this.route });
+        }
       },
       error: (error: Error) => {},
     });
