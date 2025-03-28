@@ -16,25 +16,26 @@ export class AdminService {
   constructor(
     private http: HttpClient,
     private localAuthService: LocalAuthService
-  ) {
-    this.user = this.localAuthService.getUser();
-  }
+  ) {}
 
   loadInventory(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.inventoryUrl}.json`).pipe(
-      map((response) => {
+    return this.http.get(`${this.inventoryUrl}.json`).pipe(
+      map((response: any) => {
         if (!response) return [];
 
         return Object.keys(response).map((key) => ({
           id: key,
-          ...response,
+          ...response[key],
         }));
       })
     );
   }
 
-  addProduct(product: { name: string; quantity: number }) {
+  addProduct(product: any): Observable<any> {
     return this.http.post(`${this.inventoryUrl}.json`, product);
+  }
+  updateProduct(id: string, product: any) {
+    return this.http.put(`${this.inventoryUrl}/${id}.json`, product);
   }
 
   deleteProduct(id: string) {

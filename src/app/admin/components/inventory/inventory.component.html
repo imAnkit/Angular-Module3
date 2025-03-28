@@ -1,1 +1,64 @@
-<p>inventory works!</p>
+<div class="col-container">
+  <div class="col-container">
+    <form #formContainer="ngForm" (ngSubmit)="addProductToInventory()">
+      <label for="name">Product Name: </label>
+
+      <input
+        name="name"
+        type="text"
+        required
+        [(ngModel)]="newProduct.name"
+        #name="ngModel"
+      />
+      <p style="color: red" *ngIf="name.touched && name.invalid">
+        Enter valid Name
+      </p>
+      <br />
+      <label for="quantity">Quantity: </label>
+      <input
+        name="quantity"
+        type="number"
+        required
+        [(ngModel)]="newProduct.quantity"
+        #quantity="ngModel"
+      />
+      <p style="color: red" *ngIf="quantity.touched && quantity.invalid">
+        Enter Valid quantity
+      </p>
+      <br />
+
+      <button [disabled]="formContainer.invalid" type="submit">Add</button>
+    </form>
+  </div>
+
+  <div class="col-container">
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Quantity</td>
+          <td>Actions</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inventory of inventories">
+          <td>{{ inventory.name }}</td>
+          <td>{{ inventory.quantity }}</td>
+          <td>
+            <span
+              style="cursor: pointer; color: green"
+              (click)="increaseProductCount(inventory.id, inventory)"
+              >+</span
+            >
+            <span
+              style="cursor: pointer; color: red"
+              (click)="decreaseProductCount(inventory.id, inventory)"
+              >-</span
+            >
+            <button (click)="deleteProduct(inventory.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-manage-orders',
   templateUrl: './manage-orders.component.html',
-  styleUrls: ['./manage-orders.component.css']
+  styleUrls: ['./manage-orders.component.css'],
 })
-export class ManageOrdersComponent {
-
+export class ManageOrdersComponent implements OnInit {
+  orders: any[] = [];
+  isLoading = false;
+  constructor() {}
+  ngOnInit(): void {}
 }
