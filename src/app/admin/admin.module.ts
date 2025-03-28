@@ -28,5 +28,6 @@ const adminRoutes: Routes = [
     NavbarAdminComponent,
   ],
   imports: [CommonModule, FormsModule, RouterModule.forChild(adminRoutes)],
+  exports: [AdminProfileComponent],
 })
 export class AdminModule {}

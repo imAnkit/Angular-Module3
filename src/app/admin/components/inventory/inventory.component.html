@@ -26,6 +26,17 @@
         Enter Valid quantity
       </p>
       <br />
+      <label for="price">Price: </label>
+      <input
+        name="price"
+        type="number"
+        required
+        [(ngModel)]="newProduct.price"
+        #price="ngModel"
+      />
+      <p style="color: red" *ngIf="price.touched && price.invalid">
+        Enter Valid Price
+      </p>
 
       <button [disabled]="formContainer.invalid" type="submit">Add</button>
     </form>
@@ -37,6 +48,7 @@
         <tr>
           <td>Name</td>
           <td>Quantity</td>
+          <td>Price</td>
           <td>Actions</td>
         </tr>
       </thead>
@@ -44,6 +56,7 @@
         <tr *ngFor="let inventory of inventories">
           <td>{{ inventory.name }}</td>
           <td>{{ inventory.quantity }}</td>
+          <td>{{ inventory.price }}</td>
           <td>
             <span
               style="cursor: pointer; color: green"

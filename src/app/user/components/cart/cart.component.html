@@ -1,0 +1,23 @@
+<div class="col-container">
+  <div class="row-container" *ngFor="let item of cartItems">
+    <div>
+      <p>Name: {{ item.name }}</p>
+    </div>
+    <div class="row-container">
+      <span
+        style="cursor: pointer; color: green"
+        (click)="increaseItemCount(item.id, item)"
+        >+</span
+      >
+      {{ item.amount }}
+      <span
+        style="cursor: pointer; color: red"
+        (click)="decreaseItemCount(item.id, item)"
+        >-</span
+      >
+      <button (click)="removeItem(item.id)">Remove</button>
+    </div>
+  </div>
+  <p>{{ totalPrice }}</p>
+  <button (click)="bookOrder()">Book Order</button>
+</div>

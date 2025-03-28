@@ -13,6 +13,7 @@ export class InventoryComponent implements OnInit {
   newProduct = {
     name: '',
     quantity: 0,
+    price: 0,
   };
   constructor(private adminService: AdminService) {}
   ngOnInit(): void {
@@ -38,6 +39,7 @@ export class InventoryComponent implements OnInit {
       id: id,
       name: product.name,
       quantity: productQuanity,
+      price: product.price,
     };
     this.adminService.updateProduct(product.id, product).subscribe({
       next: () => {
@@ -79,6 +81,7 @@ export class InventoryComponent implements OnInit {
         this.newProduct = {
           name: '',
           quantity: 0,
+          price: 0,
         };
         alert('Product Added');
       },

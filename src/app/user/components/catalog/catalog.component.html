@@ -1,0 +1,9 @@
+<div class="col-container">
+  <div class="row-container" *ngFor="let item of inventories">
+    <div>
+      <p>Name: {{ item.name }}</p>
+    </div>
+
+    <button (click)="addToCart(item.id, item)">Add to Cart</button>
+  </div>
+</div>
