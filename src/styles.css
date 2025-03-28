@@ -1,1 +1,155 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --primary--color: #3498db;
+  --secondary--color: #055286;
+  --background--color: #f9f9f9;
+  --on--background--color: #333333;
+  --card--color: #ffffff;
+  --card--variant--color: #e0e0e0;
+  --error--color: #e74c3c;
+  --confirm--color: #27ae60;
+  --border--radius: 8px;
+  --padding--small: 12px 16px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--background--color);
+  color: var(--on--background--color);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--primary--color);
+  font-weight: 600;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--border--radius);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+button {
+  padding: var(--padding--small);
+  background-color: var(--primary--color);
+  border: none;
+  outline: none;
+  border-radius: var(--border--radius);
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+button.secondary-btn {
+  background-color: var(--confirm--color);
+}
+
+button.secondary-btn:hover {
+  background-color: #1e8449;
+}
+
+button.destructive-btn {
+  background-color: var(--error--color);
+}
+
+button.destructive-btn:hover {
+  background-color: #c0392b;
+}
+
+input,
+textarea {
+  padding: var(--padding--small);
+  border-radius: var(--border--radius);
+  outline: none;
+  border: 1px solid var(--card--variant--color);
+  color: var(--on--background--color);
+  background-color: #ffffff;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+textarea {
+  min-width: 350px;
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--primary--color);
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px dashed var(--error--color);
+  background-color: #fdecea;
+}
+
+hr {
+  width: 70%;
+  border: 0;
+  height: 1px;
+  background-color: var(--card--variant--color);
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.col-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-container {
+  padding: 24px;
+  border-radius: var(--border--radius);
+  background-color: var(--card--color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.card-container:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.hover-primary:hover {
+  background-color: var(--primary--color);
+  color: #ffffff;
+}
+
+.error-text {
+  font-size: 12px;
+  color: var(--error--color);
+}
