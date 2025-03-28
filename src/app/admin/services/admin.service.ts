@@ -41,6 +41,9 @@ export class AdminService {
     return this.http.put(`${this.inventoryUrl}/${id}.json`, product);
   }
 
+  getProductById(id: string): Observable<any> {
+    return this.http.get(`${this.inventoryUrl}/${id}.json`);
+  }
   deleteProduct(id: string) {
     return this.http.delete(`${this.inventoryUrl}/${id}.json`);
   }

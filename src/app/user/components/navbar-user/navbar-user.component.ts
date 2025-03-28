@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/authentication/services/auth.service';
 
 @Component({
-  selector: 'app-navbar-admin',
-  templateUrl: './navbar-admin.component.html',
-  styleUrls: ['./navbar-admin.component.css'],
+  selector: 'app-navbar-user',
+  templateUrl: './navbar-user.component.html',
+  styleUrls: ['./navbar-user.component.css'],
 })
-export class NavbarAdminComponent {
+export class NavbarUserComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   logout() {

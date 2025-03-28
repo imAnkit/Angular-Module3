@@ -29,14 +29,13 @@ export class SigninComponent {
         this.isLoading = false;
         const type = user.type.toLowerCase().trim();
 
-        // if (user.name === '') {
-        //   this.router.navigate(['../../', `${type}/profile`], {
-        //     relativeTo: this.route,
-        //   });
-        // } else {
-        //   this.router.navigate(['../../', type], { relativeTo: this.route });
-        // }
-        this.router.navigate(['../../', type], { relativeTo: this.route });
+        if (!user.name) {
+          this.router.navigate([`../../${type}`, `profile`], {
+            relativeTo: this.route,
+          });
+        } else {
+          this.router.navigate(['../../', type], { relativeTo: this.route });
+        }
       },
       error: (error: Error) => {},
     });

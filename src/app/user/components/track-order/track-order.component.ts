@@ -19,17 +19,8 @@ export class TrackOrderComponent implements OnInit {
     this.loadOrders();
   }
   loadOrders() {
-    this.userService.loadAllOrders().subscribe({
-      next: (list) => {
-        list.filter((item) => {
-          item.userId === this.userId;
-        });
-        this.orders = list;
-        console.log(list);
-      },
-      error: (error) => {
-        console.error(error);
-      },
+    this.userService.loadAllOrders().subscribe((list) => {
+      this.orders = list.filter((item) => item.userId === this.userId);
     });
   }
 }

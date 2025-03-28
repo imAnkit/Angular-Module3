@@ -7,6 +7,7 @@ import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.com
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 const adminRoutes: Routes = [
   {
@@ -22,6 +23,7 @@ const adminRoutes: Routes = [
 ];
 @NgModule({
   declarations: [
+    AdminComponent,
     AdminProfileComponent,
     InventoryComponent,
     ManageOrdersComponent,

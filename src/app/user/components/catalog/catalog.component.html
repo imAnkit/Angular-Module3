@@ -1,9 +1,13 @@
 <div class="col-container">
   <div class="row-container" *ngFor="let item of inventories">
-    <div>
+    <div *ngIf="item.quantity > 0">
       <p>Name: {{ item.name }}</p>
     </div>
-
-    <button (click)="addToCart(item.id, item)">Add to Cart</button>
+    <div *ngIf="item.quantity > 0">
+      <p>Price:{{ item.price }}</p>
+    </div>
+    <div *ngIf="item.quantity > 0">
+      <button (click)="addToCart(item.id, item)">Add to Cart</button>
+    </div>
   </div>
 </div>

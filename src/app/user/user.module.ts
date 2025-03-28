@@ -8,6 +8,7 @@ import { AdminProfileComponent } from '../admin/components/admin-profile/admin-p
 import { RouterModule, Routes } from '@angular/router';
 import { AdminModule } from '../admin/admin.module';
 import { FormsModule } from '@angular/forms';
+import { NavbarUserComponent } from './components/navbar-user/navbar-user.component';
 const userRoutes: Routes = [
   {
     path: '',
@@ -23,12 +24,13 @@ const userRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CatalogComponent, CartComponent, TrackOrderComponent],
-  imports: [
-    CommonModule,
-    AdminModule,
-    RouterModule.forChild(userRoutes),
-    FormsModule,
+  declarations: [
+    UserComponent,
+    CatalogComponent,
+    CartComponent,
+    TrackOrderComponent,
+    NavbarUserComponent,
   ],
+  imports: [CommonModule, RouterModule.forChild(userRoutes), FormsModule],
 })
 export class UserModule {}
