@@ -9,6 +9,18 @@ import { User } from 'src/app/Models/user';
   styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent {
+  user1 = {
+    email: 'user1@gmail.com',
+    password: 'test123',
+  };
+  user2 = {
+    email: 'user2@gmail.com',
+    password: 'test123',
+  };
+  admin1 = {
+    email: 'admin1@gmail.com',
+    password: 'test123',
+  };
   userInput = {
     email: '',
     password: '',
