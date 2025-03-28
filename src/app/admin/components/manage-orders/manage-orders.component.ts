@@ -10,7 +10,9 @@ export class ManageOrdersComponent implements OnInit {
   orders: any[] = [];
   isLoading = false;
   constructor(private adminService: AdminService) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadOrders();
+  }
   loadOrders() {
     this.adminService.loadOrders().subscribe({
       next: (list) => {
@@ -20,6 +22,15 @@ export class ManageOrdersComponent implements OnInit {
       error: (error) => {},
     });
   }
-  updateOrder() {}
+  updateStatus(id: string, order: any) {
+    this.adminService.updateOrder(id, order).subscribe({
+      next: () => {
+        console.log('Order Updated');
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
   deleteOrder(id: string) {}
 }

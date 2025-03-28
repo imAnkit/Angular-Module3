@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { LocalAuthService } from 'src/app/authentication/services/local-auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -9,15 +10,28 @@ import { UserService } from '../../services/user.service';
 export class CartComponent implements OnInit {
   cartItems: any[] = [];
   currentItem = {};
-  totalPrice = 0;
-  constructor(private userService: UserService) {}
+  totalPrice: number = 0;
+  private userId: string | undefined;
+  constructor(
+    private userService: UserService,
+    private localAuthService: LocalAuthService
+  ) {}
   ngOnInit(): void {
     this.loadCartItems();
+    this.userId = this.localAuthService.getUserId();
+  }
+  calculatePrice(items: any[]) {
+    this.totalPrice = 0;
+    items.forEach((item) => {
+      this.totalPrice += item.price * item.amount;
+    });
   }
   loadCartItems() {
     this.userService.loadCartItmes().subscribe({
       next: (list) => {
         this.cartItems = list;
+
+        this.calculatePrice(this.cartItems);
         console.log(this.cartItems);
       },
       error: (error) => {
@@ -25,7 +39,6 @@ export class CartComponent implements OnInit {
       },
     });
   }
-  bookOrder() {}
 
   increaseItemCount(id: string, item: any) {
     let amount = item.amount;
@@ -76,6 +89,30 @@ export class CartComponent implements OnInit {
       next: () => {
         this.loadCartItems();
       },
+    });
+  }
+
+  bookOrder() {
+    if (this.cartItems.length === 0) {
+      alert('Cart is empty');
+      return;
+    }
+    this.cartItems.forEach((item) => {
+      let newOrder = {
+        prodId: item.id,
+        prodName: item.name,
+        data: new Date().toISOString(),
+        price: item.price * item.amount,
+        amount: item.amount,
+        status: 'Placed',
+        userId: this.userId,
+      };
+      this.userService.placeOrder(newOrder).subscribe({
+        next: () => {
+          this.removeItem(item.id);
+          console.log(`Order placed for ${item.name}`);
+        },
+      });
     });
   }
 }

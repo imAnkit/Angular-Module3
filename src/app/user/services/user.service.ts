@@ -56,7 +56,7 @@ export class UserService {
     return this.http.delete(`${this.cartUrl}/${this.userId}/${id}.json`);
   }
 
-  loadOrders(): Observable<any[]> {
+  loadAllOrders(): Observable<any[]> {
     return this.http.get<any[]>(`${this.ordersUrl}.json`).pipe(
       map((response: any) => {
         if (!response) return [];
@@ -68,10 +68,15 @@ export class UserService {
       })
     );
   }
+
   getUserDetails(): Observable<any> {
     return this.http.get<any>(`${this.userUrl}/${this.userId}.json`);
   }
   updateUser(id: string, user: any) {
     return this.http.put(`${this.userUrl}/${id}.json`, user);
+  }
+
+  placeOrder(order: any) {
+    return this.http.post(`${this.ordersUrl}.json`, order);
   }
 }

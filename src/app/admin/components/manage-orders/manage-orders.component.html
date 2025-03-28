@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let order of orders">
-        <td>{{ order.name }}</td>
+        <td>{{ order.prodName }}</td>
         <td>{{ order.amount }}</td>
         <td>
           <select
@@ -19,12 +19,13 @@
             name="status"
             #status="ngModel"
           >
-            <option value="" selected>{{ order.status }}</option>
-            <option value="placed">Placed</option>
-            <option value="processing">Admin</option>
+            <option value="" selected disabled>{{ order.status }}</option>
+            <option value="Placed">Placed</option>
+            <option value="Processing">Processing</option>
             <option value="On the way">On the way</option>
-            <option value="delivered">Delivered</option>
+            <option value="Delivered">Delivered</option>
           </select>
+          <button (click)="updateStatus(order.id, order)">Update</button>
         </td>
         <td>
           <button (click)="deleteOrder(order.id)">Delete</button>
