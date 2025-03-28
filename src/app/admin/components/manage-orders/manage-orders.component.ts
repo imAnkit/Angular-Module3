@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-manage-orders',
@@ -8,6 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class ManageOrdersComponent implements OnInit {
   orders: any[] = [];
   isLoading = false;
-  constructor() {}
+  constructor(private adminService: AdminService) {}
   ngOnInit(): void {}
+  loadOrders() {
+    this.adminService.loadOrders().subscribe({
+      next: (list) => {
+        this.orders = list;
+        console.log(this.orders);
+      },
+      error: (error) => {},
+    });
+  }
+  updateOrder() {}
+  deleteOrder(id: string) {}
 }

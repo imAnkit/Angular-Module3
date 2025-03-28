@@ -12,11 +12,14 @@ export class AdminService {
   private inventoryUrl = `${BASE_URL}/inventory`;
   private ordersUrl = `${BASE_URL}/orders`;
   private userUrl = `${BASE_URL}/users`;
-  private user: User | undefined = undefined;
+  // private user: User | undefined = undefined;
+  private userId: string | undefined;
   constructor(
     private http: HttpClient,
     private localAuthService: LocalAuthService
-  ) {}
+  ) {
+    this.userId = this.localAuthService.getUserId();
+  }
 
   loadInventory(): Observable<any[]> {
     return this.http.get(`${this.inventoryUrl}.json`).pipe(
@@ -44,11 +47,11 @@ export class AdminService {
 
   loadOrders(): Observable<any[]> {
     return this.http.get<any[]>(`${this.ordersUrl}.json`).pipe(
-      map((response) => {
+      map((response: any) => {
         if (!response) return [];
 
         return Object.keys(response).map((key) => ({
-          ...response,
+          ...response[key],
           id: key,
         }));
       })
@@ -59,5 +62,10 @@ export class AdminService {
     return this.http.put(`${this.ordersUrl}/${id}.json`, order);
   }
 
-  getUserDetails() {}
+  getUserDetails(): Observable<any> {
+    return this.http.get<any>(`${this.userUrl}/${this.userId}.json`);
+  }
+  updateUser(id: string, user: any) {
+    return this.http.put(`${this.userUrl}/${id}.json`, user);
+  }
 }

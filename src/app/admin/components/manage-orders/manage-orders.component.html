@@ -1,1 +1,35 @@
-<p>manage-orders works!</p>
+<div class="col-container">
+  <table>
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Quantity</td>
+        <td>Update status</td>
+        <td>Delete</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.name }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>
+          <select
+            [(ngModel)]="order.status"
+            required
+            name="status"
+            #status="ngModel"
+          >
+            <option value="" selected>{{ order.status }}</option>
+            <option value="placed">Placed</option>
+            <option value="processing">Admin</option>
+            <option value="On the way">On the way</option>
+            <option value="delivered">Delivered</option>
+          </select>
+        </td>
+        <td>
+          <button (click)="deleteOrder(order.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

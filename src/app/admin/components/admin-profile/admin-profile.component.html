@@ -1,1 +1,58 @@
-<p>admin-profile works!</p>
+<div class="col-container">
+  <form #formContainer="ngForm" (ngSubmit)="onSubmit()">
+    <label for="email">Name: </label>
+
+    <input
+      name="name"
+      type="text"
+      required
+      [(ngModel)]="userInput.name"
+      #name="ngModel"
+    />
+    <p style="color: red" *ngIf="name.touched && name.invalid">
+      Enter valid Name
+    </p>
+    <br />
+    <label for="address">address: </label>
+    <input
+      name="address"
+      type="address"
+      required
+      [(ngModel)]="userInput.address"
+      #address="ngModel"
+    />
+    <p style="color: red" *ngIf="address.touched && address.invalid">
+      Enter Valid address
+    </p>
+    <br />
+    <label for="pincode">Pincode: </label>
+    <input
+      name="pincode"
+      minlength="6"
+      type="text"
+      required
+      [(ngModel)]="userInput.pincode"
+      #pincode="ngModel"
+    />
+    <p style="color: red" *ngIf="pincode.touched && pincode.invalid">
+      Enter valid Pincode
+    </p>
+    <br />
+    <label for="phone">Phone: </label>
+    <input
+      name="phone"
+      minlength="10"
+      maxlength="10"
+      type="text"
+      required
+      [(ngModel)]="userInput.phone"
+      #phone="ngModel"
+    />
+    <p style="color: red" *ngIf="phone.touched && phone.invalid">
+      Enter valid Phone Number
+    </p>
+    <br />
+
+    <button [disabled]="formContainer.invalid" type="submit">SignIn</button>
+  </form>
+</div>

@@ -27,9 +27,10 @@ export class SigninComponent {
     this.authService.signin(this.userInput).subscribe({
       next: (user: User) => {
         this.isLoading = false;
-        const type = user.type.toLowerCase();
+        const type = user.type.toLowerCase().trim();
+
         if (user.name === '') {
-          this.router.navigate(['../../', `${type}/profiledetails`], {
+          this.router.navigate(['../../', `${type}/profile`], {
             relativeTo: this.route,
           });
         } else {
