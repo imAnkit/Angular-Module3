@@ -1,5 +1,5 @@
-<div class="col-container">
-  <table>
+<div class="col-container card-container" *ngIf="!isLoading">
+  <table class="user-table">
     <thead>
       <tr>
         <td>Item Name</td>
@@ -17,4 +17,7 @@
       </tr>
     </tbody>
   </table>
+</div>
+<div *ngIf="isLoading">
+  <app-loader></app-loader>
 </div>

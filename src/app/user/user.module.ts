@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminModule } from '../admin/admin.module';
 import { FormsModule } from '@angular/forms';
 import { NavbarUserComponent } from './components/navbar-user/navbar-user.component';
+import { SharedModule } from '../shared/shared.module';
 const userRoutes: Routes = [
   {
     path: '',
@@ -31,6 +32,11 @@ const userRoutes: Routes = [
     TrackOrderComponent,
     NavbarUserComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(userRoutes), FormsModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(userRoutes),
+    FormsModule,
+    SharedModule,
+  ],
 })
 export class UserModule {}

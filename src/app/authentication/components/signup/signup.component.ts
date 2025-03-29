@@ -15,7 +15,7 @@ export class SignupComponent {
   };
 
   isLoading = false;
-  errorMessage = '';
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -29,7 +29,9 @@ export class SignupComponent {
         this.isLoading = false;
         this.router.navigate(['../', 'signin'], { relativeTo: this.route });
       },
-      error: (error) => {},
+      error: (error) => {
+        this.isLoading = false;
+      },
     });
   }
   toSignIn() {

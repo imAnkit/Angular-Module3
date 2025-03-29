@@ -10,6 +10,7 @@ import { LocalAuthService } from 'src/app/authentication/services/local-auth.ser
 export class TrackOrderComponent implements OnInit {
   orders: any[] = [];
   userId: string | undefined = undefined;
+  isLoading = false;
   constructor(
     private userService: UserService,
     private localAuthService: LocalAuthService
@@ -19,8 +20,10 @@ export class TrackOrderComponent implements OnInit {
     this.loadOrders();
   }
   loadOrders() {
+    this.isLoading = true;
     this.userService.loadAllOrders().subscribe((list) => {
       this.orders = list.filter((item) => item.userId === this.userId);
+      this.isLoading = false;
     });
   }
 }

@@ -16,16 +16,22 @@ export class AdminProfileComponent implements OnInit {
     id: '',
     type: '',
   };
+  isLoading = false;
   constructor(private adminService: AdminService) {}
   ngOnInit(): void {
     this.loadUser();
   }
 
   loadUser() {
+    this.isLoading = true;
     this.adminService.getUserDetails().subscribe({
       next: (user) => {
         this.userInput = user;
-        console.log(user);
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error while fetching user.', err);
+        this.isLoading = false;
       },
     });
   }
@@ -35,12 +41,17 @@ export class AdminProfileComponent implements OnInit {
       alert('Fill all the details correctly');
       return;
     }
+    this.isLoading = true;
     this.adminService.updateUser(this.userInput.id, this.userInput).subscribe({
       next: () => {
         alert('User Updated');
         console.log(this.userInput);
-
+        this.isLoading = false;
         this.loadUser();
+      },
+      error: (err) => {
+        console.error(err);
+        this.isLoading = false;
       },
     });
   }

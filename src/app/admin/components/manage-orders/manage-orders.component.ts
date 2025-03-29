@@ -14,12 +14,16 @@ export class ManageOrdersComponent implements OnInit {
     this.loadOrders();
   }
   loadOrders() {
+    this.isLoading = true;
     this.adminService.loadOrders().subscribe({
       next: (list) => {
         this.orders = list;
-        console.log(this.orders);
+        this.isLoading = false;
       },
-      error: (error) => {},
+      error: (error) => {
+        console.error(error);
+        this.isLoading = false;
+      },
     });
   }
   updateStatus(id: string, order: any) {

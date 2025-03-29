@@ -1,6 +1,10 @@
-<div class="col-container">
-  <div class="col-container">
-    <form #formContainer="ngForm" (ngSubmit)="addProductToInventory()">
+<div class="col-container" *ngIf="!isLoading">
+  <div class="card-container auth-card">
+    <form
+      #formContainer="ngForm"
+      (ngSubmit)="addProductToInventory()"
+      class="form-container"
+    >
       <label for="name">Product Name: </label>
 
       <input
@@ -13,7 +17,6 @@
       <p style="color: red" *ngIf="name.touched && name.invalid">
         Enter valid Name
       </p>
-      <br />
       <label for="quantity">Quantity: </label>
       <input
         name="quantity"
@@ -25,7 +28,6 @@
       <p style="color: red" *ngIf="quantity.touched && quantity.invalid">
         Enter Valid quantity
       </p>
-      <br />
       <label for="price">Price: </label>
       <input
         name="price"
@@ -42,8 +44,8 @@
     </form>
   </div>
 
-  <div class="col-container">
-    <table>
+  <div class="col-container card-container">
+    <table class="user-table">
       <thead>
         <tr>
           <td>Name</td>
@@ -59,12 +61,12 @@
           <td>{{ inventory.price }}</td>
           <td>
             <span
-              style="cursor: pointer; color: green"
+              class="span-btn green"
               (click)="increaseProductCount(inventory.id, inventory)"
               >+</span
             >
             <span
-              style="cursor: pointer; color: red"
+              class="span-btn red"
               (click)="decreaseProductCount(inventory.id, inventory)"
               >-</span
             >
@@ -74,4 +76,7 @@
       </tbody>
     </table>
   </div>
+</div>
+<div *ngIf="isLoading">
+  <app-loader></app-loader>
 </div>

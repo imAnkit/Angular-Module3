@@ -1,13 +1,14 @@
-<div class="col-container">
-  <div class="row-container" *ngFor="let item of inventories">
-    <div *ngIf="item.quantity > 0">
+<div class="col-container" *ngIf="!isLoading">
+  <div class="inventory-item" *ngFor="let item of inventories">
+    <div *ngIf="item.quantity > 0" class="inventory-details">
       <p>Name: {{ item.name }}</p>
-    </div>
-    <div *ngIf="item.quantity > 0">
-      <p>Price:{{ item.price }}</p>
-    </div>
-    <div *ngIf="item.quantity > 0">
-      <button (click)="addToCart(item.id, item)">Add to Cart</button>
+      <p>Price: {{ item.price }}</p>
+      <button class="add-cart-btn" (click)="addToCart(item.id, item)">
+        Add to Cart
+      </button>
     </div>
   </div>
+</div>
+<div *ngIf="isLoading">
+  <app-loader></app-loader>
 </div>

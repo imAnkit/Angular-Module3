@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 const adminRoutes: Routes = [
   {
@@ -29,7 +30,12 @@ const adminRoutes: Routes = [
     ManageOrdersComponent,
     NavbarAdminComponent,
   ],
-  imports: [CommonModule, FormsModule, RouterModule.forChild(adminRoutes)],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule.forChild(adminRoutes),
+    SharedModule,
+  ],
   exports: [AdminProfileComponent],
 })
 export class AdminModule {}

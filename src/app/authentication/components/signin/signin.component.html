@@ -1,68 +1,72 @@
-<div class="col-container">
-  <form #formContainer="ngForm" (ngSubmit)="onSubmit()">
-    <label for="email">Email: </label>
-
-    <input
-      name="email"
-      type="email"
-      required
-      email
-      [(ngModel)]="userInput.email"
-      #email="ngModel"
-    />
-    <p style="color: red" *ngIf="email.touched && email.invalid">
-      Enter valid Email
-    </p>
-    <br />
-    <label for="password">Password: </label>
-    <input
-      name="password"
-      type="password"
-      required
-      [(ngModel)]="userInput.password"
-      #password="ngModel"
-    />
-    <p style="color: red" *ngIf="password.touched && password.invalid">
-      Enter Valid Password
-    </p>
-    <br />
-
-    <button [disabled]="formContainer.invalid" type="submit">SignIn</button>
-  </form>
-  <p>
-    Already have an account?
-    <span style="cursor: pointer; color: blue" (click)="toSignUp()"
-      >SignUp</span
+<div class="col-container auth-container" *ngIf="!isLoading">
+  <div class="card-container auth-card">
+    <form
+      #formContainer="ngForm"
+      (ngSubmit)="onSubmit()"
+      class="form-container"
     >
-  </p>
+      <label for="email">Email:</label>
+      <input
+        name="email"
+        type="email"
+        required
+        email
+        [(ngModel)]="userInput.email"
+        #email="ngModel"
+      />
+      <p class="error-text" *ngIf="email.touched && email.invalid">
+        Enter valid Email
+      </p>
+
+      <label for="password">Password:</label>
+      <input
+        name="password"
+        type="password"
+        required
+        [(ngModel)]="userInput.password"
+        #password="ngModel"
+      />
+      <p class="error-text" *ngIf="password.touched && password.invalid">
+        Enter Valid Password
+      </p>
+
+      <button [disabled]="formContainer.invalid" type="submit">Sign In</button>
+    </form>
+    <br />
+    <p>
+      Already have an account?
+      <span class="link-text" (click)="toSignUp()">Sign Up</span>
+    </p>
+  </div>
+
+  <br />
+  <div class="card-container">
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ user1.email }}</td>
+          <td>{{ user1.password }}</td>
+          <td>User</td>
+        </tr>
+        <tr>
+          <td>{{ user2.email }}</td>
+          <td>{{ user2.password }}</td>
+          <td>User</td>
+        </tr>
+        <tr>
+          <td>{{ admin1.email }}</td>
+          <td>{{ admin1.password }}</td>
+          <td>Admin</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-<br />
-<br />
-<div>
-  <table>
-    <thead>
-      <tr>
-        <td>Email</td>
-        <td>password</td>
-        <td>Role</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{ user1.email }}</td>
-        <td>{{ user1.password }}</td>
-        <td>User</td>
-      </tr>
-      <tr>
-        <td>{{ user2.email }}</td>
-        <td>{{ user2.password }}</td>
-        <td>User</td>
-      </tr>
-      <tr>
-        <td>{{ admin1.email }}</td>
-        <td>{{ admin1.password }}</td>
-        <td>Admin</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<app-loader *ngIf="isLoading"></app-loader>

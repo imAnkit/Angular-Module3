@@ -9,21 +9,27 @@ import { UserService } from '../../services/user.service';
 export class CatalogComponent implements OnInit {
   inventories: any[] = [];
   currentProductId!: string;
-
+  isLoading = false;
   constructor(private userService: UserService) {}
   ngOnInit(): void {
     this.loadInventory();
   }
   loadInventory() {
+    this.isLoading = true;
     this.userService.loadInventory().subscribe({
       next: (list) => {
         this.inventories = list;
         console.log(this.inventories);
+        this.isLoading = false;
       },
-      error: (error) => {},
+      error: (error) => {
+        console.error(error);
+        this.isLoading = false;
+      },
     });
   }
   addToCart(id: string, item: any) {
+    this.isLoading = true;
     let cartItem = {
       prodId: id,
       name: item.name,
@@ -33,9 +39,11 @@ export class CatalogComponent implements OnInit {
     this.userService.addItemToCart(cartItem).subscribe({
       next: () => {
         alert('Item added to cart');
+        this.isLoading = false;
       },
       error: (error) => {
         alert(error);
+        this.isLoading = false;
       },
     });
   }

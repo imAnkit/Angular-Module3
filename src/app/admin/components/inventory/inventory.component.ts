@@ -15,17 +15,23 @@ export class InventoryComponent implements OnInit {
     quantity: 0,
     price: 0,
   };
+  isLoading = false;
   constructor(private adminService: AdminService) {}
   ngOnInit(): void {
     this.loadInventory();
   }
   loadInventory() {
+    this.isLoading = true;
     this.adminService.loadInventory().subscribe({
       next: (list) => {
         this.inventories = list;
         console.log(this.inventories);
+        this.isLoading = false;
       },
-      error: (error) => {},
+      error: (error) => {
+        console.error(error);
+        this.isLoading = false;
+      },
     });
   }
   decreaseProductCount(id: string, product: any) {
@@ -58,6 +64,7 @@ export class InventoryComponent implements OnInit {
       id: id,
       name: product.name,
       quantity: productQuanity,
+      price: product.price,
     };
     this.adminService.updateProduct(product.id, product).subscribe({
       next: () => {
@@ -75,9 +82,12 @@ export class InventoryComponent implements OnInit {
       alert('Product quantity should be greater than zero');
       return;
     }
+    this.isLoading = true;
     this.adminService.addProduct(this.newProduct).subscribe({
       next: () => {
-        this.inventories.push(this.newProduct);
+        this.isLoading = false;
+        this.loadInventory();
+
         this.newProduct = {
           name: '',
           quantity: 0,
@@ -85,13 +95,22 @@ export class InventoryComponent implements OnInit {
         };
         alert('Product Added');
       },
-      error: (error) => {},
+      error: (error) => {
+        console.error(error);
+        this.isLoading = false;
+      },
     });
   }
   deleteProduct(id: string) {
+    this.isLoading = true;
     this.adminService.deleteProduct(id).subscribe({
       next: () => {
+        this.isLoading = false;
         this.loadInventory();
+      },
+      error: (err) => {
+        console.error(err);
+        this.isLoading = false;
       },
     });
   }

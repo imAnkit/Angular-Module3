@@ -1,5 +1,5 @@
-<div class="col-container">
-  <form #formContainer="ngForm" (ngSubmit)="onSubmit()">
+<div class="col-container card-container auth-card" *ngIf="!isLoading">
+  <form #formContainer="ngForm" (ngSubmit)="onSubmit()" class="form-container">
     <label for="email">Name: </label>
 
     <input
@@ -53,6 +53,8 @@
     </p>
     <br />
 
-    <button [disabled]="formContainer.invalid" type="submit">SignIn</button>
+    <button [disabled]="formContainer.invalid" type="submit">Save User</button>
   </form>
 </div>
+
+<div *ngIf="isLoading"><app-loader></app-loader></div>

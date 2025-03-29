@@ -12,7 +12,6 @@ export class AdminService {
   private inventoryUrl = `${BASE_URL}/inventory`;
   private ordersUrl = `${BASE_URL}/orders`;
   private userUrl = `${BASE_URL}/users`;
-  // private user: User | undefined = undefined;
   private userId: string | undefined;
   constructor(
     private http: HttpClient,

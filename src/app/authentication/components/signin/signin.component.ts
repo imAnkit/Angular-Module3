@@ -27,7 +27,7 @@ export class SigninComponent {
   };
 
   isLoading = false;
-  errorMessage = '';
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -49,7 +49,9 @@ export class SigninComponent {
           this.router.navigate(['../../', type], { relativeTo: this.route });
         }
       },
-      error: (error: Error) => {},
+      error: (error: Error) => {
+        this.isLoading = false;
+      },
     });
   }
   toSignUp() {
